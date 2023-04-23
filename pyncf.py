@@ -769,52 +769,7 @@ class _NetCDFClassicBackend(object):
 
 
 if __name__ == "__main__":
-    filepath = "ECMWF_ERA-40_subset.nc"
-    obj = NetCDF(filepath)
-
-    import pprint
-    #pprint.pprint(obj.header)
-
-    print "----record dimension"
-    pprint.pprint(obj.get_record_dimension())
-
-    #print "----record variables"
-    #pprint.pprint(obj.get_record_variables())
-
-    print "----nonrecord variables"
-    pprint.pprint(obj.get_nonrecord_variables())
-
-    print "----coordinate variables"
-    pprint.pprint(obj.get_coordinate_variables())
-
-    print "----dimension values"
-    print obj.read_dimension_values("time")
-    
-    ###########
-
-    varname = "p2t" #msl,tcc,p2t,tcw
-    varinfo = obj.get_varinfo(varname)
-
-    print "----inspecting data:"
-    pprint.pprint(varinfo)
-    rows = obj.read_2d_data(varname, time=10)
-    print repr(rows)[:900]
-    print repr(rows[::50])[:900]
-    print repr(rows)[-900:]
-    print len(rows), len(rows[0])
-
-    import PIL, PIL.Image
-    img = PIL.Image.new("F",(len(rows[0]),len(rows)))
-    pxls = img.load()
-    #img.putdata([v for row in rows for v in row])
-    for y,row in enumerate(rows):
-        for x,v in enumerate(row):
-            #print x,y
-            pxls[x,y] = v
-
-    import pythongis as pg
-    rast = pg.raster.data.RasterData(image=img, cellwidth=1, cellheight=-1, xy_cell=(0,0), xy_geo=(0,0))
-    rast.view(1000,500,gradcolors=[(0,255,0),(255,255,0),(255,0,0)])
+   pass
 
 
     
